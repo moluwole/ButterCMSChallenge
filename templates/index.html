@@ -1,0 +1,32 @@
+{% extends '_base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div id="app">
+	<div v-if="blogPageContent">
+		<div v-html="blogPageContent.fields.readme">
+			[[ blogPageContent.fields.readme ]]
+		</div>
+	</div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+<script src="https://cdnjs.buttercms.com/buttercms-1.2.5.min.js"></script>
+<script>
+  var app = new Vue({
+		  delimiters: ['[[', ']]'],
+		  el: '#app',
+		  data: {
+		      blogPageContent: null,
+      },
+		  mounted:  async function () {
+          const butter = Butter('3c236ad88eafc769110d0f85e8327b84ae3f6af0');
+          const response = await butter.page.retrieve('*', 'sample-page')
+		      const responseData = await response.data;
+          this.blogPageContent = responseData.data;
+
+      },
+  })
+</script>
+{% endblock %}
