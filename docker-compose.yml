@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  app:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8009:8000
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=)fzh@z6a--ku3elc&(gq_00re(oi^h%lnip8^+&=z8+xei09fh
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 api [::1]
+      - BUTTER_KEY=3c236ad88eafc769110d0f85e8327b84ae3f6af0
+    networks:
+      - host
+
+networks:
+  host:
